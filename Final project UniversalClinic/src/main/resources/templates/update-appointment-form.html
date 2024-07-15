@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Update Appointment</title>
+</head>
+<body>
+<div layout:fragment="content" class="wrapper">
+    <div class="row dashboard-block-full action-page">
+        <div class="col">
+            <div>
+                <h3>Update Appointment Details</h3>
+            </div>
+            <form class="form-grid" th:action="@{/appointments/{appointmentId}/update(appointmentId=${appointment.id})}" method="post">
+                <input type="hidden" name="_method" value="put" />
+                <div class="from-row">
+                    <div class="input-block local-forms search-wrap">
+                        <label>Doctor</label>
+                        <input type="text" placeholder="Doctor" class="search-by-js" data-type="doctors" th:value="${appointment.doctor.lastName}">
+                        <div class="search-results search-results-js"></div>
+                        <input type="hidden" name="doctorId" th:value="${appointment.doctor.id}" placeholder="Doctor" required="required" class="id-value"/>
+                    </div>
+                    <div class="input-block local-forms search-wrap">
+                        <label>Patient</label>
+                        <input type="text" placeholder="Patient" class="search-by-js" data-type="patients" th:value="${appointment.patient.lastName}">
+                        <div class="search-results search-results-js"></div>
+                        <input type="hidden" name="patientId" th:value="${appointment.patient.id}" placeholder="Patient" required="required" class="id-value"/>
+                    </div>
+                </div>
+
+                <div class="from-row">
+                    <div class="input-block local-forms">
+                        <label>Date</label>
+                        <input type="datetime-local" name="datetime" th:value="${appointment.appointmentDate}" required="required"/>
+                    </div>
+
+                    <div class="input-block local-forms">
+                        <label>Title</label>
+                        <input type="text" name="title" required="required" placeholder="Title" th:value="${appointment.title}"/>
+                    </div>
+                </div>
+
+                <div class="from-row">
+                    <button type="submit" class="btn btn-add">Update Appointment</button>
+                </div>
+            </form>
+
+
+            <br>
+
+            <form th:action="@{/appointments/{id}/delete(id=${appointment.id})}" method="post" style="display:inline;">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit" class="btn btn-add delete-btn">Delete</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

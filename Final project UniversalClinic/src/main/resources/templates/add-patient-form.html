@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Add Patient</title>
+    <style>
+        .error{color:red}
+    </style>
+</head>
+<body>
+<div layout:fragment="content" class="wrapper">
+    <div class="row dashboard-block-full">
+        <div class="col">
+            <div>
+                <h3>Add Patient</h3>
+            </div>
+            <form class="form-grid" th:action="@{/patients/add(userId=${userId})}" th:object="${patient}" method="post">
+
+                <div class="from-row">
+                    <div class="input-block local-forms">
+                        <label>First Name</label>
+                        <input type="text" th:field="*{firstName}" placeholder="First Name" required="required"/>
+                        <!--Error message -->
+                        <span th:if="${#fields.hasErrors('firstName')}"
+                              th:errors="*{firstName}"
+                              class="error"></span>
+                    </div>
+
+                    <div class="input-block local-forms">
+                        <label>Last Name</label>
+                        <input type="text" th:field="*{lastName}" placeholder="Last Name" required="required"/>
+                        <span th:if="${#fields.hasErrors('lastName')}"
+                              th:errors="*{lastName}"
+                              class="error"></span>
+                    </div>
+                </div>
+
+                <div class="from-row">
+                    <div class="input-block local-forms">
+                        <label>Email</label>
+                        <input type="email" th:field="*{email}" placeholder="Email" required="required"/>
+                        <span th:if="${#fields.hasErrors('email')}"
+                              th:errors="*{email}"
+                              class="error"></span>
+                    </div>
+
+                    <div class="input-block local-forms">
+                        <label>Phone</label>
+                        <input type="text" th:field="*{phone}" placeholder="Phone" required="required"/>
+                        <span th:if="${#fields.hasErrors('phone')}"
+                              th:errors="*{phone}"
+                              class="error"></span>
+                    </div>
+                </div>
+
+                <div class="from-row">
+                    <div class="input-block local-forms">
+                        <label>Birthday</label>
+                        <input type="date" th:field="*{birthday}" required="required"/>
+                    </div>
+                </div>
+
+                <div class="from-row">
+                    <input type="submit" value="Add Patient" class="btn btn-add"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

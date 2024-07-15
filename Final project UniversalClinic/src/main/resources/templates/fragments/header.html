@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+<header th:fragment="header">
+
+    <div class="nav-wrap">
+        <div class="logo">
+            <a href="/">
+                <img th:src="@{/img/logo.svg}" width="30" height="30">
+                Uni <span>Clinic</span>
+            </a>
+        </div>
+        <button class="nav-btn nav-btn-js">
+            <img th:src="@{/img/nav-icon.svg}" width="30" height="30">
+        </button>
+    </div>
+    <div class="user-info">
+        <div class="user-data">Welcome, <span th:text="${username}">User</span>!</div>
+       <a href="/logout"> <img th:src="@{/img/logout.svg}" width="30" height="30"> </a>
+    </div>
+</header>
+</body>
+</html>

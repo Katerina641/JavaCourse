@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Appointment</title>
+</head>
+<body>
+<div layout:fragment="content" class="wrapper">
+    <div class="row dashboard-block-full action-page">
+        <div class="col">
+            <div>
+                <h3>Appointment</h3>
+            </div>
+                <div class="from-row">
+                    <div class="input-block local-forms">
+                        <h4>Doctor</h4>
+                        <p>
+                            Last name: <span th:text="${appointment.doctor.lastName}"></span>
+                        </p>
+                        <p>
+                            First name: <span th:text="${appointment.doctor.firstName}"></span>
+                        </p>
+                        <p>
+                            Phone: <span th:text="${appointment.doctor.phone}"></span>
+                        </p>
+                        <p>
+                            Email: <span th:text="${appointment.doctor.email}"></span>
+                        </p>
+                        <p>
+                            Department: <span th:text="${appointment.doctor.department}"></span>
+                        </p>
+                        <p>
+                            <a th:href="@{/doctors/{id}/update(id=${appointment.doctor.id})}">Edit</a>
+                        </p>
+                    </div>
+                    <div class="input-block local-forms">
+                        <h4>Patient</h4>
+                        <p>
+                            Last name: <span th:text="${appointment.patient.lastName}"></span>
+                        </p>
+                        <p>
+                            First name: <span th:text="${appointment.patient.firstName}"></span>
+                        </p>
+                       <p>
+                           Phone: <span th:text="${appointment.patient.phone}"></span>
+                       </p>
+                        <p>
+                           Email: <span th:text="${appointment.patient.email}"></span>
+                        </p>
+                        <p>
+                            <a th:href="@{/patients/{id}/update(id=${appointment.patient.id})}">Edit</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="from-row">
+                    <div class="input-block local-forms">
+                        <h4>Date</h4>
+                        <p th:text="${appointment.appointmentDate}"></p>
+                    </div>
+
+                    <div class="input-block local-forms">
+                        <h4>Title</h4>
+                        <p th:text="${appointment.title}"></p>
+                    </div>
+                </div>
+            <a th:href="@{/appointments/{id}/update(id=${appointment.id})}" class="btn btn-add">
+                Edit
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

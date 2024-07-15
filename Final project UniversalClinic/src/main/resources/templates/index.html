@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+<div layout:fragment="content" class="wrapper">
+
+    <div class="row dashboard-block-full welcome">
+        <h2>Good Morning, <span th:text="${username}"></span></h2>
+        <p>Have a nice day at work</p>
+    </div>
+
+    <div class="row block-4-wrap">
+            <div class="dashboard-block-full dashboard-block-full-1">
+                <h2>Appointments</h2>
+                <img th:src="@{/img/appointment.svg}" width="30" height="30">
+                <p class="info-dash" th:text="${appointments}">0</p>
+            </div>
+            <div class="dashboard-block-full dashboard-block-full-1">
+                <h2>Patients</h2>
+                <img th:src="@{/img/patients.svg}" width="30" height="30">
+                <p class="info-dash" th:text="${patients}">0</p>
+            </div>
+            <div class="dashboard-block-full dashboard-block-full-1">
+                <h2>Doctors</h2>
+                <img th:src="@{/img/doctor.svg}" width="30" height="30">
+                <p class="info-dash" th:text="${doctors}">0</p>
+            </div>
+            <div class="dashboard-block-full dashboard-block-full-1">
+                <h2>Ai Helper</h2>
+                <img th:src="@{/img/ai.svg}" width="30" height="30">
+                <p>
+                    <a href="/ai-helper">Open Ai</a>
+                </p>
+            </div>
+    </div>
+
+
+
+</div>
+</body>
+</html>

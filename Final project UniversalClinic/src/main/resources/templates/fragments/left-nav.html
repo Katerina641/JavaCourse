@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="left-nav" class="left-nav left-nav-js">
+    <ul>
+        <li th:classappend="${title == 'Dashboard'} ? 'active'">
+            <a href="/">
+                <img th:src="@{/img/dashboard.svg}" width="30" height="30">
+                Dashboard
+            </a>
+        </li>
+        <li th:classappend="${title == 'Doctors'} ? 'active'">
+            <a href="/doctors">
+                <img th:src="@{/img/doctor.svg}" width="30" height="30">
+                Doctors
+            </a>
+        </li>
+        <li th:classappend="${title == 'Patients'} ? 'active'">
+            <a href="/patients">
+                <img th:src="@{/img/patients.svg}" width="30" height="30">
+                Patients
+            </a>
+        </li>
+        <li th:classappend="${title == 'Departments'} ? 'active'">
+            <a href="/departments">
+                <img th:src="@{/img/departments.svg}" width="30" height="30">
+                Departments
+            </a>
+        </li>
+        <li th:classappend="${title == 'Appointments'} ? 'active'">
+            <a href="/appointments">
+                <img th:src="@{/img/appointment.svg}" width="30" height="30">
+                Appointments
+            </a>
+        </li>
+        <li th:classappend="${title == 'Calendar'} ? 'active'">
+            <a href="/calendar">
+                <img th:src="@{/img/calendar.svg}" width="30" height="30">
+                Calendar
+            </a>
+        </li>
+        <li th:classappend="${title == 'Ai helper'} ? 'active'">
+            <a href="/ai-helper">
+                <img th:src="@{/img/ai.svg}" width="30" height="30">
+                Ai helper
+            </a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

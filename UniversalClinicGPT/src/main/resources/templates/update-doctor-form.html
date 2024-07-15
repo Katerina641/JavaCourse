@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Update Doctor</title>
+</head>
+<body>
+<div layout:fragment="content" class="wrapper">
+    <div class="row dashboard-block-full">
+        <div class="col">
+            <div>
+                <h3>Update Doctor</h3>
+            </div>
+            <form class="form-grid" th:action="@{/doctors/{doctorId}/update(doctorId=${doctor.id})}" th:object="${doctor}" method="post">
+                <input type="hidden" name="_method" value="put" />
+                <div class="from-row">
+                <div class="input-block local-forms">
+                    <label>First Name</label>
+                    <input type="text" th:field="*{firstName}" required="required"/>
+                </div>
+                <div class="input-block local-forms">
+                    <label>Last Name</label>
+                    <input type="text" th:field="*{lastName}" required="required"/>
+                </div>
+                </div>
+
+                <div class="from-row">
+                <div class="input-block local-forms">
+                    <label>Email</label>
+                    <input type="email" th:field="*{email}" required="required"/>
+                </div>
+                <div class="input-block local-forms">
+                    <label>Phone</label>
+                    <input type="text" th:field="*{phone}" required="required"/>
+                </div>
+                </div>
+
+                <div class="from-row">
+                <div class="input-block local-forms">
+                    <label>Department</label>
+                    <input type="text" th:field="*{department}" required="required"/>
+                </div>
+                </div>
+
+                <div class="from-row">
+                    <button type="submit" class="btn btn-add">Update Doctor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div layout:fragment="content" class="wrapper">
+
+    <div class="row dashboard-block-full">
+        <div class="col">
+            <div class="header-block">
+                <div class="header-block__search">
+                    <h3>Patients List</h3>
+
+                    <div class="input-block local-forms search-wrap">
+                        <input type="text" placeholder="search" class="search-by-js" data-type="patients">
+                        <div class="search-results search-results-js"></div>
+                    </div>
+
+                </div>
+                <a href="/patients/add" class="btn btn-add">Add patient +</a>
+            </div>
+            <div id="doctors">
+                <div class="table-responsive custom-table-responsive">
+                    <table class="table custom-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody th:if="${patientsPage != null}">
+                        <tr th:each="patient, iterStat : ${patientsPage.content}">
+                            <th scope="row" th:text="${iterStat.index + 1 + currentPage * 5}">1</th>
+                            <td><span th:text="${patient.firstName}">FirstName</span> <span th:text="${patient.lastName}">LastName</span></td>
+                            <td><span th:text="${patient.phone}">Contact</span></td>
+                            <td><span th:text="${patient.email}">Email</span></td>
+                            <td><a th:href="@{/patients/{id}/update(id=${patient.id})}">Edit</a></td>
+                            <td>
+                                <form th:action="@{/patients/{id}/delete(id=${patient.id})}" method="post" style="display:inline;">
+                                    <input type="hidden" name="_method" value="delete"/>
+                                    <button type="submit" class="btn btn-add delete-btn">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody  th:if="${patientsPage == null || patientsPage.isEmpty()}">
+                        <tr>
+                            <td colspan="6">No patients found.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <a th:if="${!patientsPage.isFirst()}" th:href="@{/patients/all(page=${currentPage - 1})}">&laquo;</a>
+                    <span th:text="'Page ' + ${currentPage + 1} + ' of ' + ${patientsPage.totalPages}">Page 1 of 1</span>
+                    <a th:if="${!patientsPage.isLast()}" th:href="@{/patients/all(page=${currentPage + 1})}">&raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

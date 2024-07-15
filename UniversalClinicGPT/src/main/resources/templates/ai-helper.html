@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Ai helper</title>
+</head>
+<body>
+<div layout:fragment="content" class="wrapper">
+    <div class="row dashboard-block-full action-page">
+        <div class="col">
+            <div>
+                <h3>Ai helper</h3>
+            </div>
+
+            <div>
+                <textarea id="userInput" rows="4" cols="50" placeholder="Type your message here..."></textarea>
+            </div>
+            <div>
+                <button onclick="sendMessage()">Send</button>
+            </div>
+            <div>
+                <h3>Response:</h3>
+                <p id="responseText"></p>
+            </div>
+
+            <script>
+                async function sendMessage() {
+                    const userInput = document.getElementById("userInput").value;
+                    let  apiUrl = "http://localhost:8080/AI-Assistant?prompt=".concat(userInput);
+
+                        let response = await fetch(apiUrl);
+                        let responseText = await getTextFromStream(response.body);
+
+                        document.getElementById("responseText").innerText  = responseText;
+                    }
+
+                    async function getTextFromStream(readableStream) {
+                        let reader = readableStream.getReader();
+                        let utf8Decoder = new TextDecoder();
+                        let nextChunk;
+
+                        let resultStr = '';
+
+                        while (!(nextChunk = await reader.read()).done) {
+                            let partialData = nextChunk.value;
+                            resultStr += utf8Decoder.decode(partialData);
+                        }
+
+                        return resultStr;
+                    }
+
+                    (async() => {
+                        await fetchTest();
+                    })();
+
+            </script>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

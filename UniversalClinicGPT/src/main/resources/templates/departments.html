@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Departments</title>
+</head>
+<body>
+<div layout:fragment="content" class="wrapper">
+
+    <div class="row dashboard-block-full">
+        <div class="col">
+            <div class="header-block">
+                <div class="header-block__search">
+                    <h3>Departments List</h3>
+                    <div class="input-block local-forms">
+                        <input type="text" placeholder="search">
+                    </div>
+                </div>
+                <a href="/departments/add" class="btn btn-add">Add department +</a>
+            </div>
+            <div id="doctors">
+                <div class="table-responsive custom-table-responsive">
+                    <table class="table custom-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Department Name</th>
+                            <th scope="col">Details</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody th:if="${departmentsPage != null}">
+                        <tr th:each="department, iterStat : ${departmentsPage.content}">
+                            <th scope="row" th:text="${iterStat.index + 1 + currentPage * 5}">1</th>
+                            <td th:text="${department.departmentName}"></td>
+                            <td><a th:href="@{/departments/{id}(id=${department.id})}">Details</a></td>
+                            <td><a th:href="@{/departments/{id}/update(id=${department.id})}">Edit</a></td>
+                            <td>
+                                <form th:action="@{/departments/{id}/delete(id=${department.id})}" method="post" style="display:inline;">
+                                    <input type="hidden" name="_method" value="delete"/>
+                                    <button type="submit" class="btn btn-add delete-btn">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody  th:if="${departmentsPage == null || departmentsPage.isEmpty()}">
+                        <tr>
+                            <td colspan="6">No departments found.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <a th:if="${!departmentsPage.isFirst()}" th:href="@{/departments/all(page=${currentPage - 1})}">&laquo;</a>
+                    <span th:text="'Page ' + ${currentPage + 1} + ' of ' + ${departmentsPage.totalPages}">Page 1 of 1</span>
+                    <a th:if="${!departmentsPage.isLast()}" th:href="@{/departments/all(page=${currentPage + 1})}">&raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

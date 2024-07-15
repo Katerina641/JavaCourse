@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div layout:fragment="content" class="wrapper">
+
+    <div id='calendar'></div>
+
+    <!-- Serialize appointments to JSON -->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var appointmentsJson = /*[[${appointments}]]*/ '[]';
+        /*]]>*/
+    </script>
+
+
+    <script>
+        try{
+        const appointments = appointmentsJson// Parse only if appointmentsJson is a JSON string
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const calendarEl = document.getElementById('calendar');
+
+                const events = appointments.map(appointment => ({
+                    title: appointment.title,
+                    start: appointment.appointment,
+                    url: `/appointments/${appointment.id}`,
+                    allDay: false
+                }));
+
+                const calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    events: events
+                });
+
+                calendar.render();
+            });
+
+        } catch (err){
+            console.log(err)
+        }
+    </script>
+
+</div>
+</body>
+</html>
